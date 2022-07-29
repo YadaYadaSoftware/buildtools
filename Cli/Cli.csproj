@@ -9,6 +9,7 @@
     <PackageId>YadaYadaSoftware.BuildTools.$(AssemblyName)</PackageId>
 	  <PackAsTool>true</PackAsTool>
 	  <ToolCommandName>dotnet-yadayada</ToolCommandName>  </PropertyGroup>
+	<RepositoryUrl>https://github.com/YadaYadaSoftware/buildtools.git</RepositoryUrl>
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
