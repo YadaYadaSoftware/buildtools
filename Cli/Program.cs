@@ -6,19 +6,16 @@ using YadaYada.BuildTools.Cli;
 
 Console.WriteLine("Hello, World!");
 
-Parser.Default.ParseArguments<UpdateProjectReferencesCommand>(args)
-    .WithParsed<UpdateProjectReferencesCommand>(o =>
-    {
-    });
-
-await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand, UpdateTemplateUrlCommand>(args)
+ParserResult<object> parserResult = await (await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand, UpdateTemplateUrlCommand>(args)
         .WithParsedAsync<UpdateProjectReferencesCommand>(async o =>
         {
         }))
     .WithParsedAsync<UpdateTemplateUrlCommand>(async o =>
     {
         await o.ApplyAsync();
-    });
+    })).WithNotParsedAsync(errors => throw new NotSupportedException());
+
+Environment.Exit(parserResult.Errors.Count());
 
 public abstract class CommandBase
 {
