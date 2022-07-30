@@ -11,7 +11,16 @@ ParserResult<object> parserResult = await (await (await Parser.Default.ParseArgu
         }))
     .WithParsedAsync<UpdateTemplateUrlCommand>(async o =>
     {
-        await o.ApplyAsync();
+        try
+        {
+            await o.ApplyAsync();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            throw;
+        }
     })).WithNotParsedAsync(errors => throw new NotSupportedException());
 
 Environment.Exit(parserResult.Errors.Count());
