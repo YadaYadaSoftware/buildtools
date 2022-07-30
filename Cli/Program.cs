@@ -2,6 +2,7 @@
 
 using CommandLine;
 using YadaYada.BuildTools.Cli;
+using YadaYada.BuildTools.Cli.Templates;
 
 Console.WriteLine("Hello, World!");
 

@@ -1,4 +1,6 @@
-﻿public abstract class CommandBase
+﻿namespace YadaYada.BuildTools.Cli;
+
+public abstract class CommandBase
 {
     public abstract Task ApplyAsync();
 }

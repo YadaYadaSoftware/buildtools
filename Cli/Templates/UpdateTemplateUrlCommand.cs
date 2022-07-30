@@ -1,5 +1,6 @@
-﻿using Amazon.CloudFormation;
-using CommandLine;
+﻿using CommandLine;
+
+namespace YadaYada.BuildTools.Cli.Templates;
 
 [Verb("update-template-url", HelpText = "Updates a TemplateUrl property in a template")]
 public class UpdateTemplateUrlCommand : CommandBase

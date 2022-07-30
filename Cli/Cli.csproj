@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="YadaYadaSoftware.Amazon.CloudFormation" Version="1.210.103" />
   </ItemGroup>
 
 </Project>
