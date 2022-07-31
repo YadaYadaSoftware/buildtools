@@ -5,12 +5,14 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cli", "Cli\Cli.csproj", "{EBCE4877-EC0B-4266-BADD-C954C31BC7BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cli.Test", "Cli.Test\Cli.Test.csproj", "{5D31030F-71DE-47C3-B6B0-DE620824DC0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cli.Test", "Cli.Test\Cli.Test.csproj", "{5D31030F-71DE-47C3-B6B0-DE620824DC0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9C961984-1DF9-43C8-963F-BE1E705B74D5}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{D613B761-7E83-4EFC-843F-43799E5C661E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{5D31030F-71DE-47C3-B6B0-DE620824DC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D31030F-71DE-47C3-B6B0-DE620824DC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D31030F-71DE-47C3-B6B0-DE620824DC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D613B761-7E83-4EFC-843F-43799E5C661E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D613B761-7E83-4EFC-843F-43799E5C661E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D613B761-7E83-4EFC-843F-43799E5C661E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D613B761-7E83-4EFC-843F-43799E5C661E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <RepositoryUrl>https://github.com/YadaYadaSoftware/buildtools.git</RepositoryUrl>
+	  <RootNamespace>YadaYada.BuildTools.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+	  <PackageId>YadaYadaSoftware.BuildTools.$(AssemblyName)</PackageId>
+  </PropertyGroup>
+
+</Project>
