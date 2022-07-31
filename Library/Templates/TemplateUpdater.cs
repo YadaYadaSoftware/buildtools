@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Nodes;
 
-namespace YadaYada.BuildTools.Cli.Templates;
+namespace YadaYada.BuildTools.Templates;
 
 public static class TemplateUpdater
 {

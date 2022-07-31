@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using YadaYada.BuildTools.Templates;
 
 namespace YadaYada.BuildTools.Cli.Templates;
 

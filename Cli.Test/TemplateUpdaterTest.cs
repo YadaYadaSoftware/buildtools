@@ -1,6 +1,7 @@
 using System.Text.Json.Nodes;
 using FluentAssertions;
 using YadaYada.BuildTools.Cli.Templates;
+using YadaYada.BuildTools.Templates;
 
 namespace Amazon.CloudFormation.Test
 {

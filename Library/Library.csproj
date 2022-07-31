@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	  <RepositoryUrl>https://github.com/YadaYadaSoftware/buildtools.git</RepositoryUrl>
-	  <RootNamespace>YadaYada.BuildTools.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+	  <RootNamespace>YadaYada.BuildTools</RootNamespace>
 	  <PackageId>YadaYadaSoftware.BuildTools.$(AssemblyName)</PackageId>
   </PropertyGroup>
 
