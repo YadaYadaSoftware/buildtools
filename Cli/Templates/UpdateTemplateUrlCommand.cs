@@ -6,13 +6,13 @@ namespace YadaYada.BuildTools.Cli.Templates;
 [Verb("update-template-url", HelpText = "Updates a TemplateUrl property in a template")]
 public class UpdateTemplateUrlCommand : CommandBase
 {
-    [Option('t',"template")]
+    [Option('t',"template", Required = true)]
     public FileInfo Template { get; set; }
 
-    [Option('r', "resource")]
+    [Option('r', "resource", Required = true)]
     public string Resource { get; set; }
 
-    [Option('u', "template-url")]
+    [Option('u', "template-url", Required = true)]
     public Uri TemplateUrl { get; set; }
     public override Task ApplyAsync()
     {
