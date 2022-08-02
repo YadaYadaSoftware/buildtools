@@ -4,17 +4,17 @@ namespace YadaYada.BuildTools.Templates;
 
 public static class TemplateUpdater
 {
-    public static async Task UpdateTemplateAsync(FileInfo templateFile, string resource, string propertyPath, string newValue)
+    public static async Task UpdateTemplateAsync(FileInfo templateFile, string logicalId, string propertyPath, string newValue)
     {
         if (templateFile == null) throw new ArgumentNullException(nameof(templateFile));
-        if (resource == null) throw new ArgumentNullException(nameof(resource));
+        if (logicalId == null) throw new ArgumentNullException(nameof(logicalId));
         if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
         if (newValue == null) throw new ArgumentNullException(nameof(newValue));
         if (templateFile == null) throw new ArgumentNullException(nameof(templateFile));
-        if (resource == null) throw new ArgumentNullException(nameof(resource));
+        if (logicalId == null) throw new ArgumentNullException(nameof(logicalId));
         if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
         if (newValue == null) throw new ArgumentNullException(nameof(newValue));
-        if (string.IsNullOrEmpty(resource)) throw new ArgumentException("Value cannot be null or empty.", nameof(resource));
+        if (string.IsNullOrEmpty(logicalId)) throw new ArgumentException("Value cannot be null or empty.", nameof(logicalId));
         if (string.IsNullOrEmpty(propertyPath)) throw new ArgumentException("Value cannot be null or empty.", nameof(propertyPath));
 
         if (!templateFile.Exists) throw new FileNotFoundException(templateFile.FullName);
@@ -27,10 +27,20 @@ public static class TemplateUpdater
         var resources = templateNode["Resources"];
         ArgumentNullException.ThrowIfNull(resources, nameof(resources));
 
-        var blue = resources[resource];
-        ArgumentNullException.ThrowIfNull(blue, nameof(blue));
+        JsonNode? resource = default ;//= resources[logicalId];
 
-        var properties = blue["Properties"];
+        foreach (var (key, value) in resources.AsObject())
+        {
+            if (string.Equals(key, logicalId, StringComparison.CurrentCulture))
+            {
+                resource = value;
+                break;
+            }
+        }
+
+        ArgumentNullException.ThrowIfNull(resource, nameof(resource));
+
+        var properties = resource["Properties"];
         ArgumentNullException.ThrowIfNull(properties, nameof(properties));
 
         var effectedProperty = properties[propertyPath];
