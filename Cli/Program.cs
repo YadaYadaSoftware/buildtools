@@ -4,7 +4,7 @@ using CommandLine;
 using YadaYada.BuildTools.Cli;
 using YadaYada.BuildTools.Cli.Templates;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine(string.Join(',', args));
 
 ParserResult<object> parserResult = await (await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand, UpdateTemplateUrlCommand>(args)
         .WithParsedAsync<UpdateProjectReferencesCommand>(async o =>
