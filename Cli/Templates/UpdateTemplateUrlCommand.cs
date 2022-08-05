@@ -17,6 +17,6 @@ public class UpdateTemplateUrlCommand : CommandBase
     public override Task ApplyAsync()
     {
         Console.WriteLine($"{nameof(ApplyAsync)}:{nameof(Template)}={Template}, {nameof(Resource)}={Resource}, {nameof(TemplateUrl)}={TemplateUrl}");
-        return TemplateUpdater.UpdateTemplateAsync(this.Template, this.Resource, "TemplateURL", this.TemplateUrl.ToString());
+        return TemplateUpdater.UpdatePropertyValue(this.Template, this.Resource, "TemplateURL", this.TemplateUrl.ToString());
     }
 }

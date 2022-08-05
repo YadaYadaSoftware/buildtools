@@ -4,25 +4,39 @@ namespace YadaYada.BuildTools.Templates;
 
 public static class TemplateUpdater
 {
-    public static async Task UpdateTemplateAsync(FileInfo templateFile, string logicalId, string propertyPath, string newValue)
+    // ReSharper disable once UnusedMember.Global
+    public static async Task UpdateParameterValue(FileInfo templateFile, string logicalId, string newValue)
     {
         if (templateFile == null) throw new ArgumentNullException(nameof(templateFile));
         if (logicalId == null) throw new ArgumentNullException(nameof(logicalId));
-        if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
+        if (newValue == null) throw new ArgumentNullException(nameof(newValue));
+        var templateNode = await GetTemplateNode(templateFile);
+        var parametersNode = templateNode["Parameters"];
+        ArgumentNullException.ThrowIfNull(parametersNode,nameof(parametersNode));
+
+        var parameterToUpdate = parametersNode[logicalId];
+        ArgumentNullException.ThrowIfNull(parameterToUpdate,nameof(parameterToUpdate));
+
+        UpdateNode(parameterToUpdate, "Default", newValue);
+
+        await File.WriteAllTextAsync(templateFile.FullName, templateNode.ToJsonString());
+
+
+    }
+    public static async Task UpdatePropertyValue(FileInfo templateFile, string logicalId, string path, string newValue)
+    {
+        if (templateFile == null) throw new ArgumentNullException(nameof(templateFile));
+        if (logicalId == null) throw new ArgumentNullException(nameof(logicalId));
+        if (path == null) throw new ArgumentNullException(nameof(path));
         if (newValue == null) throw new ArgumentNullException(nameof(newValue));
         if (templateFile == null) throw new ArgumentNullException(nameof(templateFile));
         if (logicalId == null) throw new ArgumentNullException(nameof(logicalId));
-        if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
+        if (path == null) throw new ArgumentNullException(nameof(path));
         if (newValue == null) throw new ArgumentNullException(nameof(newValue));
         if (string.IsNullOrEmpty(logicalId)) throw new ArgumentException("Value cannot be null or empty.", nameof(logicalId));
-        if (string.IsNullOrEmpty(propertyPath)) throw new ArgumentException("Value cannot be null or empty.", nameof(propertyPath));
+        if (string.IsNullOrEmpty(path)) throw new ArgumentException("Value cannot be null or empty.", nameof(path));
 
-        if (!templateFile.Exists) throw new FileNotFoundException(templateFile.FullName);
-
-        var json = await File.ReadAllTextAsync(templateFile.FullName);
-
-        var templateNode = JsonNode.Parse(json);
-        ArgumentNullException.ThrowIfNull(templateNode, nameof(templateNode));
+        var templateNode = await GetTemplateNode(templateFile);
 
         var resources = templateNode["Resources"];
         ArgumentNullException.ThrowIfNull(resources, nameof(resources));
@@ -43,13 +57,29 @@ public static class TemplateUpdater
         var properties = resource["Properties"];
         ArgumentNullException.ThrowIfNull(properties, nameof(properties));
 
-        var effectedProperty = properties[propertyPath];
+        var effectedProperty = properties[path];
         ArgumentNullException.ThrowIfNull(effectedProperty, nameof(effectedProperty));
 
-        var propertiesObject = properties.AsObject();
-        propertiesObject.Remove(propertyPath);
-        propertiesObject.Add(propertyPath,newValue);
+        UpdateNode(properties, path, newValue);
 
         await File.WriteAllTextAsync(templateFile.FullName, templateNode.ToJsonString());
+    }
+
+    private static void UpdateNode(JsonNode parentNode, string path, string newValue)
+    {
+        var propertiesObject = parentNode.AsObject();
+        propertiesObject.Remove(path);
+        propertiesObject.Add(path, newValue);
+    }
+
+    private static async Task<JsonNode> GetTemplateNode(FileInfo templateFile)
+    {
+        if (!templateFile.Exists) throw new FileNotFoundException(templateFile.FullName);
+
+        var json = await File.ReadAllTextAsync(templateFile.FullName);
+
+        var templateNode = JsonNode.Parse(json);
+        ArgumentNullException.ThrowIfNull(templateNode, nameof(templateNode));
+        return templateNode;
     }
 }

@@ -12,7 +12,7 @@ namespace Amazon.CloudFormation.Test
         {
             var templateFile = new FileInfo("data/master.template");
             const string s3NowhereNotTemplate = "s3://nowhere/not.template";
-            await TemplateUpdater.UpdateTemplateAsync(templateFile, "Blue", "TemplateURL", s3NowhereNotTemplate);
+            await TemplateUpdater.UpdatePropertyValue(templateFile, "Blue", "TemplateURL", s3NowhereNotTemplate);
 
             var json = await File.ReadAllTextAsync(templateFile.FullName);
 
@@ -42,7 +42,7 @@ namespace Amazon.CloudFormation.Test
         [Fact]
         public async void UpdateFileNotFound()
         {
-            Func<Task> action = () => TemplateUpdater.UpdateTemplateAsync(new FileInfo(Path.GetRandomFileName()), "s", "s", "s");
+            Func<Task> action = () => TemplateUpdater.UpdatePropertyValue(new FileInfo(Path.GetRandomFileName()), "s", "s", "s");
 
             await action.Should().ThrowAsync<FileNotFoundException>();
         }
