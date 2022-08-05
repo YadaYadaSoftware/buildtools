@@ -67,6 +67,7 @@ public static class TemplateUpdater
 
     private static void UpdateNode(JsonNode parentNode, string path, string newValue)
     {
+        Console.WriteLine("UpdateNode: {0}, {1}, {2}", parentNode.GetPath(), path, newValue);
         var propertiesObject = parentNode.AsObject();
         propertiesObject.Remove(path);
         propertiesObject.Add(path, newValue);
