@@ -14,7 +14,11 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="YadaYadaSoftware.Amazon.CloudFormation" Version="1.210.103" />
+    <PackageReference Include="YadaYadaSoftware.Amazon.CloudFormation" Version="1.228.111" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Templates\" />
   </ItemGroup>
 
 </Project>

@@ -4,21 +4,17 @@ using Amazon.CloudFormation;
 using CommandLine;
 using YadaYada.BuildTools.Cli;
 
-Console.WriteLine("Hello, World!");
 
 Parser.Default.ParseArguments<UpdateProjectReferencesCommand>(args)
     .WithParsed<UpdateProjectReferencesCommand>(o =>
     {
     });
 
-await (await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand, UpdateTemplateUrlCommand, GetConfigurationValueCommand>(args)
+await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand, GetConfigurationValueCommand>(args)
         .WithParsedAsync<UpdateProjectReferencesCommand>(async o =>
         {
-        }))
-    .WithParsedAsync<UpdateTemplateUrlCommand>(async o =>
-    {
-        await o.ApplyAsync();
-    })).WithParsedAsync<GetConfigurationValueCommand>(async o =>
+        })
+    ).WithParsedAsync<GetConfigurationValueCommand>(async o =>
 {
     await o.ApplyAsync();
 });
@@ -26,25 +22,6 @@ await (await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand
 public abstract class CommandBase
 {
     public abstract Task ApplyAsync();
-}
-
-[Verb("update-template-url", HelpText = "Updates a TemplateUrl property in a template")]
-public class UpdateTemplateUrlCommand : CommandBase
-{
-    [Option('t',"template")]
-    public FileInfo Template { get; set; }
-
-    [Option('r', "resource")]
-    public string Resource { get; set; }
-
-    [Option('u', "template-url")]
-    public Uri TemplateUrl { get; set; }
-    public override Task ApplyAsync()
-    {
-        Console.WriteLine($"{nameof(ApplyAsync)}:{nameof(Template)}={Template}, {nameof(Resource)}={Resource}, {nameof(TemplateUrl)}={TemplateUrl}");
-        TemplateUpdater.UpdateTemplateAsync(this.Template, this.Resource, "TemplateURL", this.TemplateUrl.ToString());
-        return Task.CompletedTask;
-    }
 }
 
 [Verb("get-config-value")]
