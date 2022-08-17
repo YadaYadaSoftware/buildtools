@@ -20,8 +20,19 @@ public abstract class CommandBase
 [Verb("get-config-value")]
 public class GetConfigurationValueCommand : CommandBase
 {
+    [Option('f',"settings-file", Required = true, HelpText = "Path to appsettings.json")]
+    public FileInfo SettingsFile { get; set; } = null!;
+
+    [Option('b', "branch", Required = true, HelpText = "Branch name")]
+    public string Branch { get; set; } = null!;
+
+    [Option('s', "setting-name", Required = true, HelpText = "Setting name")]
+    public string SettingName { get; set; } = null!;
+
+
+
     public override async Task ApplyAsync()
     {
-        Console.WriteLine("So you want to get a configuration value");
+        Console.WriteLine($"So you want to get a configuration value for '{this.SettingsFile}' for '{this.Branch}' for '{this.SettingName}'");
     }
 }
