@@ -8,8 +8,9 @@
     <RootNamespace>YadaYada.BuildTools.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <PackageId>YadaYadaSoftware.BuildTools.$(AssemblyName)</PackageId>
 	  <PackAsTool>true</PackAsTool>
-	  <ToolCommandName>dotnet-yadayada</ToolCommandName>  </PropertyGroup>
+	  <ToolCommandName>dotnet-yadayada</ToolCommandName>  
 	<RepositoryUrl>https://github.com/YadaYadaSoftware/buildtools.git</RepositoryUrl>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />

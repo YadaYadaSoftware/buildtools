@@ -11,14 +11,17 @@ Parser.Default.ParseArguments<UpdateProjectReferencesCommand>(args)
     {
     });
 
-await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand, UpdateTemplateUrlCommand>(args)
+await (await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand, UpdateTemplateUrlCommand, GetConfigurationValueCommand>(args)
         .WithParsedAsync<UpdateProjectReferencesCommand>(async o =>
         {
         }))
     .WithParsedAsync<UpdateTemplateUrlCommand>(async o =>
     {
         await o.ApplyAsync();
-    });
+    })).WithParsedAsync<GetConfigurationValueCommand>(async o =>
+{
+    await o.ApplyAsync();
+});
 
 public abstract class CommandBase
 {
@@ -41,5 +44,14 @@ public class UpdateTemplateUrlCommand : CommandBase
         Console.WriteLine($"{nameof(ApplyAsync)}:{nameof(Template)}={Template}, {nameof(Resource)}={Resource}, {nameof(TemplateUrl)}={TemplateUrl}");
         TemplateUpdater.UpdateTemplateAsync(this.Template, this.Resource, "TemplateURL", this.TemplateUrl.ToString());
         return Task.CompletedTask;
+    }
+}
+
+[Verb("get-config-value")]
+public class GetConfigurationValueCommand : CommandBase
+{
+    public override async Task ApplyAsync()
+    {
+        Console.WriteLine("So you want to get a configuration value");
     }
 }
