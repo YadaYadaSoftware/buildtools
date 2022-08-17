@@ -5,16 +5,9 @@ using CommandLine;
 using YadaYada.BuildTools.Cli;
 
 
-Parser.Default.ParseArguments<UpdateProjectReferencesCommand>(args)
-    .WithParsed<UpdateProjectReferencesCommand>(o =>
-    {
-    });
 
-await (await Parser.Default.ParseArguments<UpdateProjectReferencesCommand, GetConfigurationValueCommand>(args)
-        .WithParsedAsync<UpdateProjectReferencesCommand>(async o =>
-        {
-        })
-    ).WithParsedAsync<GetConfigurationValueCommand>(async o =>
+await Parser.Default.ParseArguments<GetConfigurationValueCommand>(args)
+    .WithParsedAsync<GetConfigurationValueCommand>(async o =>
 {
     await o.ApplyAsync();
 });
