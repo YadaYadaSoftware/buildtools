@@ -2,6 +2,7 @@
 
 using Amazon.CloudFormation;
 using CommandLine;
+using Microsoft.Extensions.Configuration;
 using YadaYada.BuildTools.Cli;
 
 
@@ -33,6 +34,13 @@ public class GetConfigurationValueCommand : CommandBase
 
     public override async Task ApplyAsync()
     {
-        Console.WriteLine($"So you want to get a configuration value for '{this.SettingsFile}' for '{this.Branch}' for '{this.SettingName}'");
+        var configurationBuilder = new ConfigurationBuilder();
+        configurationBuilder.AddJsonFile(this.SettingsFile.FullName, true);
+        var branchFile = new FileInfo(this.SettingsFile.FullName.Replace(".json", this.Branch + ".json"));
+        if (branchFile.Exists) configurationBuilder.AddJsonFile(branchFile.FullName, false);
+
+        var configurationRoot = configurationBuilder.Build();
+        string setting = configurationRoot[this.SettingName];
+        Console.Write(setting);
     }
 }
