@@ -9,7 +9,9 @@
     <PackageId>YadaYadaSoftware.BuildTools.$(AssemblyName)</PackageId>
 	  <PackAsTool>true</PackAsTool>
 	  <ToolCommandName>dotnet-yadayada</ToolCommandName>  
-	<RepositoryUrl>https://github.com/YadaYadaSoftware/buildtools.git</RepositoryUrl>
+	<RepositoryUrl>https://github.com/YadaYadaSoftware/buildtools.git</RepositoryUrl>  
+	<AssemblyVersion>1.0.0.1</AssemblyVersion>  
+	<Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
