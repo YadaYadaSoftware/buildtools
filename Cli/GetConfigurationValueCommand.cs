@@ -22,11 +22,11 @@ public class GetConfigurationValueCommand : CommandBase
         configurationBuilder.AddJsonFile(this.SettingsFile.FullName, false);
         if (this.Branch != null)
         {
-            var branchFile = new FileInfo(this.SettingsFile.FullName.Replace(".json", this.Branch + ".json"));
-            Console.WriteLine(branchFile);
+            var branchFile = new FileInfo(this.SettingsFile.FullName.Replace(".json", "." + this.Branch + ".json"));
+            //Console.WriteLine(branchFile);
             if (branchFile.Exists)
             {
-                Console.WriteLine("Adding branch file");
+                //Console.WriteLine("Adding branch file");
                 configurationBuilder.AddJsonFile(branchFile.FullName, false);
             }
 
